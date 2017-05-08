@@ -37,8 +37,8 @@ node_modules/
 jspm_packages/
 
 #Exceptions
-!Publication.js
-!Searcher.js
+\!Publication.js
+\!Searcher.js
 
 # Typescript v1 declaration files
 typings/
