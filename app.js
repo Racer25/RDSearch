@@ -49,11 +49,12 @@ app.get('/etage/:etagenum/chambre', function(req, res) {
 });
 
 app.get("/searchDisease/:terms",function(req, res){
+
     //Initialisations publications
     var publications=[];
-    //URL
-    //https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmax=100&term=(achalasia%20AND%20hasabstract[text]%20AND%20Humans[Mesh])%20AND%20hasabstract[text]%20AND%20Humans[Mesh]&retmode=json
-    //On récupère notre paramètre
+
+    //On récupère nos termes de recherche
+
     var terms=req.params.terms;
     console.info("Recherche des termes: "+terms);
     
