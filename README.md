@@ -11,5 +11,8 @@ From the root of the project:
 ```
 node app.js
 ```
-### How to go to the website
+### How to go to the website?
 On your browser: http://localhost:8080/
+
+### Which file do the search on Pubmed?
+The local module **Searcher** (/local_node_modules/Searcher.js)
