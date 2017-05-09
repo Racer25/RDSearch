@@ -22,7 +22,7 @@ app.use(function(req, res, next)
 //Gestion des GET
 
 app.get('/', function(req, res) {
-    res.render('home.ejs', {etage: 4});
+    res.render('pages/home.ejs', {etage: 4});
 });
 
 app.get("/searchDisease/:terms",function(req, res){
@@ -44,8 +44,7 @@ app.get("/searchDisease/:terms",function(req, res){
 });
 
 app.use(function(req, res, next){
-    res.header("Content-Type", "application/json; charset=utf-8");
-    res.status(404).send('Page introuvable !');
+    res.status(404).render("pages/404.ejs");
 });
 
 app.listen(8080);
