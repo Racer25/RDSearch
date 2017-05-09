@@ -2,6 +2,7 @@
   "name": "RDSearch",
   "version": "0.1.0",
   "dependencies": {
+    "async": "^2.4.0",
     "body-parser": "^1.17.1",
     "cookie-session": "^2.0.0-beta.1",
     "ejs": "^2.5.6",
