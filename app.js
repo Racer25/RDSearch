@@ -22,7 +22,7 @@ app.use(function(req, res, next)
 //Gestion des GET
 
 app.get('/', function(req, res) {
-    res.render('pages/home.ejs', {etage: 4});
+    res.render('pages/home.ejs', {activetitle: "traffic"});
 });
 
 app.get("/searchDisease/:terms",function(req, res){
