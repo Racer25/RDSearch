@@ -22,30 +22,7 @@ app.use(function(req, res, next)
 //Gestion des GET
 
 app.get('/', function(req, res) {
-    res.render('pageDynamique.ejs', {etage: 4});
-});
-
-app.get('/sous-sol', function(req, res) {
-    res.header("Content-Type", "application/json; charset=utf-8");
-    premierModule.direBonjour();
-    premierModule.direByeBye();
-    res.end('Vous êtes dans la cave à vins, ces bouteilles sont à moi !');
-});
-
-app.get('/etage/:etagenum/chambre', function(req, res) {
-    //Récupération du paramètre
-    var numEtage=Number(req.params.etagenum);
-    console.log(numEtage);
-    if(isNaN(numEtage))
-        {
-            res.header("Content-Type", "application/json; charset=utf-8");
-            res.end('Ne te moque pas de moi!!');
-        }
-    else
-    {
-        res.render('pageDynamique.ejs', {etage: req.params.etagenum});
-    }
-    
+    res.render('home.ejs', {etage: 4});
 });
 
 app.get("/searchDisease/:terms",function(req, res){
@@ -65,9 +42,6 @@ app.get("/searchDisease/:terms",function(req, res){
     res.redirect('/');
     
 });
-
-
-// ... Tout le code de gestion des routes (app.get) se trouve au-dessus
 
 app.use(function(req, res, next){
     res.header("Content-Type", "application/json; charset=utf-8");
