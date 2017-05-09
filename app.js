@@ -1,7 +1,7 @@
 var express = require('express');
 var session = require('cookie-session');
 var bodyParser = require("body-parser");
-var Searcher = require("Searcher");
+var Searcher = require("./local_node_modules/Searcher.js");
 
 var app = express();
 
