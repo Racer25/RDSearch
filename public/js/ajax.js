@@ -19,7 +19,7 @@ var updateSearchResults = function(publications)
     
     //Table creation
     var table = document.createElement("table");
-    table.className="w3-table-all w3-centered w3-hoverable";
+    table.className="w3-table-all w3-centered w3-hoverable w3-animate-right";
 
     var thead = document.createElement("thead");
     
