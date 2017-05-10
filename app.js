@@ -34,13 +34,10 @@ app.get("/searchDisease/:terms",function(req, res){
 
     var terms=req.params.terms;
     console.info("Recherche des termes: "+terms);
-    
-    //Faire la recherche sur PubMed
-    Searcher.search(terms);
-    
-    //On répond enfin
-    res.redirect('/');
-    
+
+    //Faire la recherche sur PubMed et répondre
+    Searcher.search(terms, res);
+
 });
 
 app.use(function(req, res, next){
