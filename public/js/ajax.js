@@ -96,7 +96,6 @@ function searchRequest(terms)
 
 window.onload = function() 
 {
-    //Bouton pas de solution
     document.getElementById("searchButton").onclick=function(event)
     {
         var terms=document.getElementById("searchString").value;
