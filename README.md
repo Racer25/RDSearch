@@ -9,6 +9,7 @@ Website for rare diseases related publication analysis on Pubmed database
 From the root of the project:
 
 ```
+npm update
 node app.js
 ```
 ### How to go to the website?
