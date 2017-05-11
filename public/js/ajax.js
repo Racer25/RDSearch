@@ -61,7 +61,7 @@ var updateSearchResults = function(publications)
     respanel.appendChild(table);
 }
 
-function searchRequest(terms) 
+function showResultsOfSearchRequest(terms) 
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -80,7 +80,8 @@ function searchRequest(terms)
             }
             else
             {
-                console.log("Erreur dans la requête");
+                console.error("Error in searchDisease request, status: "+this.status);
+                hideLoading();
             }
         }
     }
@@ -88,7 +89,7 @@ function searchRequest(terms)
     //Show loading icon
     showLoading();
 
-    //On envoie à la servlet
+    //On envoie au serveur node.js
     maRequeteAJAX.send();
 }
 
@@ -101,7 +102,7 @@ window.onload = function()
         var terms=document.getElementById("searchString").value;
         if(terms!="")
         {
-            searchRequest(terms);
+            showResultsOfSearchRequest(terms);
         }
     }
 

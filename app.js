@@ -27,16 +27,12 @@ app.get('/', function(req, res) {
 
 app.get("/searchDisease/:terms",function(req, res){
 
-    //Initialisations publications
-    var publications=[];
-
     //On récupère nos termes de recherche
-
     var terms=req.params.terms;
     console.info("Recherche des termes: "+terms);
 
-    //Faire la recherche sur PubMed et répondre
-    Searcher.search(terms, res);
+    //Faire la recherche sur PubMed et renvoyer les publications en json directement
+    Searcher.search(terms, function(publications){res.json(publications);});
 
 });
 
