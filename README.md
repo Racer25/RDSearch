@@ -6,12 +6,19 @@ Website for rare diseases related publication analysis on Pubmed database
 - W3.css
 
 ### Start web server
-From the root of the project:
-
+First of all, you have to update node modules:
 ```
 npm update
+```
+
+Once done, use this command each time you want to start the web server:
+```
 node app.js
 ```
+
+### Stop web server
+Use **CTRL + C**
+
 ### How to go to the website?
 On your browser: http://localhost:8080/
 
