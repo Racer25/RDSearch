@@ -64,7 +64,7 @@ app.get('/exactMatch/:search', function(req, res) {
     var search=req.params.search;
     ConnectionProvider.getConnection();
     ConnectionProvider.connect();
-    RareDiseaseDao.getRareDisease(search, 
+    RareDiseaseDao.getRareDiseaseByName(search, 
                                   function(results)
                                   {
         res.header("Content-Type", "application/json; charset=utf-8");
@@ -87,13 +87,22 @@ app.get('/suggestions/:terms', function(req, res) {
     });
 });
 
+app.get('/disease/:orphanetID', function(req, res) {
+    var orphanetID=req.params.orphanetID;
+
+    ConnectionProvider.getConnection();
+    ConnectionProvider.connect();
+    
+    RareDiseaseDao.getRareDiseaseByOrphanetID(orphanetID, function(results)
+                                  {
+        res.render('pages/disease.ejs', {disease: results[0]});
+    });
+});
+
 //Error 404
 app.use(function(req, res, next){
     res.status(404).render("pages/404.ejs");
 });
-
-//We start the UpdateModule
-//exec("node "+ __base + "local_node_modules/controller/UpdateModule.js");
 
 //We start the server
 app.listen(8080);
