@@ -13,6 +13,9 @@ var LingPipeModule = require("./local_node_modules/controller/LingPipeModule.js"
 var RelationExtractor = require("./local_node_modules/controller/RelationExtractor.js");
 var UpdateModule = require("./local_node_modules/controller/UpdateModule.js");
 
+var ConnectionProvider = require("./local_node_modules/dao/ConnectionProvider.js");
+var RareDiseaseDao = require("./local_node_modules/dao/RareDiseaseDao.js");
+
 //Server configuration (session, static, ...)
 var app = express();
 app.use('/static', express.static(__dirname + '/public'));
@@ -30,6 +33,10 @@ app.use(function(req, res, next)
 
 //Handling GET requests
 app.get('/', function(req, res) {
+    res.render('pages/search.ejs');
+});
+
+app.get('/home', function(req, res) {
     res.render('pages/home.ejs', {activetitle: "traffic"});
 });
 
@@ -41,7 +48,7 @@ app.get("/searchDisease/:terms",function(req, res){
 
     //Faire la recherche Pubmed et appliquer un child process
     //Searcher.search(terms, res, LingPipeModule.lingPipeFunction);
-    
+
     //Faire la recherche Pubmed et appliquer un child process
     Searcher.search(terms, res, RelationExtractor.relationExtractorFunction);
 
@@ -51,6 +58,33 @@ app.get("/searchDisease/:terms",function(req, res){
 
 app.get('/example', function(req, res) {
     res.render('pages/example.ejs', {activetitle: "views"});
+});
+
+app.get('/exactMatch/:search', function(req, res) {
+    var search=req.params.search;
+    ConnectionProvider.getConnection();
+    ConnectionProvider.connect();
+    RareDiseaseDao.getRareDisease(search, 
+                                  function(results)
+                                  {
+        res.header("Content-Type", "application/json; charset=utf-8");
+        res.json(results);
+    });
+
+});
+
+app.get('/suggestions/:terms', function(req, res) {
+    var terms=req.params.terms;
+    terms=terms.split(",");
+    
+    ConnectionProvider.getConnection();
+    ConnectionProvider.connect();
+    
+    RareDiseaseDao.getRareDiseasesSuggestions(terms, function(results)
+                                  {
+        res.header("Content-Type", "application/json; charset=utf-8");
+        res.json(results);
+    });
 });
 
 //Error 404
