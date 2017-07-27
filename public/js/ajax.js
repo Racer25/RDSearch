@@ -35,6 +35,7 @@ function showSymptomsCloudWord(terms)
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
     maRequeteAJAX.open("GET", "searchDisease/"+terms, true, null, null);
+    maRequeteAJAX.setRequestHeader("Content-Type","text/json; charset=utf-8");
     maRequeteAJAX.responseType = "json";
 
     maRequeteAJAX.onreadystatechange = function () 

@@ -5,10 +5,13 @@ global.__base = __dirname + '/';
 var express = require('express');
 var session = require('cookie-session');
 var bodyParser = require("body-parser");
+var exec = require('child_process').exec;
 
 //Personnal modules
-var Searcher = require("./local_node_modules/Searcher.js");
-var LingPipeModule = require("./local_node_modules/LingPipeModule.js");
+var Searcher = require("./local_node_modules/controller/Searcher.js");
+var LingPipeModule = require("./local_node_modules/controller/LingPipeModule.js");
+var RelationExtractor = require("./local_node_modules/controller/RelationExtractor.js");
+var UpdateModule = require("./local_node_modules/controller/UpdateModule.js");
 
 //Server configuration (session, static, ...)
 var app = express();
@@ -37,14 +40,16 @@ app.get("/searchDisease/:terms",function(req, res){
     console.info("Recherche des termes: "+terms);
 
     //Faire la recherche Pubmed et appliquer un child process
-    Searcher.search(terms, res, LingPipeModule.lingPipeFunction);
+    //Searcher.search(terms, res, LingPipeModule.lingPipeFunction);
+    
+    //Faire la recherche Pubmed et appliquer un child process
+    Searcher.search(terms, res, RelationExtractor.relationExtractorFunction);
 
     //Faire la recherche sur PubMed et renvoyer les publications en json directement
     //Searcher.search(terms, res, function(publications, res){res.json(publications);});
 });
 
 app.get('/example', function(req, res) {
-    console.log("Chemin de base: "+__base);
     res.render('pages/example.ejs', {activetitle: "views"});
 });
 
@@ -53,5 +58,8 @@ app.use(function(req, res, next){
     res.status(404).render("pages/404.ejs");
 });
 
-//We start th server
+//We start the UpdateModule
+//exec("node "+ __base + "local_node_modules/controller/UpdateModule.js");
+
+//We start the server
 app.listen(8080);
