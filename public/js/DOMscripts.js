@@ -1,3 +1,6 @@
+var selectedSuggestion;
+var exactMatch=false;
+
 var showLoading = function()
 {
     document.getElementById("loadicon").style.display = "block";
@@ -110,6 +113,8 @@ var updateSuggestions = function(suggestions)
     {
         suggestionsDiv.removeChild(suggestionsDiv.lastChild);
     }
+    //And selectedSuggestion
+    selectedSuggestion=null;
 
 
     //Add suggestion in HTML
@@ -122,11 +127,11 @@ var updateSuggestions = function(suggestions)
         suggestionDiv.textContent=suggestions[i].name;
         suggestionsDiv.appendChild(suggestionDiv);
     }
-    
+
     //0 suggestions
     if(suggestions.length==0)
     {
-       suggestionsDiv.className="w3-dropdown-content w3-bar-block w3-border w3-white";
+        suggestionsDiv.className="w3-dropdown-content w3-bar-block w3-border w3-white";
     }
     else
     {
@@ -151,4 +156,80 @@ var changeInputContent = function(name)
 {
     document.getElementById("search").value=name;
     document.getElementById("search").oninput();
+    document.getElementById("search").focus();
+}
+
+var downInSuggestions = function()
+{
+    var suggestionsDiv=document.getElementById("suggestions");
+    if(suggestionsDiv.hasChildNodes())
+    {
+        if(selectedSuggestion == null || selectedSuggestion == undefined)
+        {
+            selectedSuggestion=suggestionsDiv.firstChild;
+            selectedSuggestion.style="color: #000!important;background-color: #ccc!important;";
+        }
+        else
+        {
+            //Get index of selectedSuggestion
+            var selectedSuggestionCopy=selectedSuggestion;
+            var indexSelectedSuggestion = 0;
+            while( (selectedSuggestionCopy = selectedSuggestionCopy.previousSibling) != null ) 
+            {
+                indexSelectedSuggestion++;   
+            }
+            if(indexSelectedSuggestion < suggestionsDiv.childElementCount-1)
+            {
+                //Deleting style
+                for(var i =0; i <suggestionsDiv.childElementCount ; i++)
+                {
+                    suggestionsDiv.childNodes[i].style="";
+                }
+
+                selectedSuggestion = suggestionsDiv.childNodes[indexSelectedSuggestion+1];
+                selectedSuggestion.style="color: #000!important;background-color: #ccc!important;";
+            }
+
+        }
+    }
+}
+
+var upInSuggestions = function()
+{
+    var suggestionsDiv=document.getElementById("suggestions");
+    if(suggestionsDiv.hasChildNodes())
+    {
+        //Get index of selectedSuggestion
+        var selectedSuggestionCopy=selectedSuggestion;
+        var indexSelectedSuggestion = 0;
+        while( (selectedSuggestionCopy = selectedSuggestionCopy.previousSibling) != null ) 
+        {
+            indexSelectedSuggestion++;   
+        }
+        if(indexSelectedSuggestion > 0)
+        {
+            //Deleting style
+            for(var i =0; i <suggestionsDiv.childElementCount ; i++)
+            {
+                suggestionsDiv.childNodes[i].style="";
+            }
+
+            selectedSuggestion = suggestionsDiv.childNodes[indexSelectedSuggestion-1];
+            selectedSuggestion.style="color: #000!important;background-color: #ccc!important;";
+        }
+
+
+    }
+}
+
+var enterScript = function()
+{
+    if(selectedSuggestion != null && selectedSuggestion != undefined)
+    {
+       changeInputContent(selectedSuggestion.textContent);
+    }
+    else if(exactMatch)
+    {
+        document.getElementById("searchButton").click();
+    }
 }

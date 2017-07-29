@@ -117,12 +117,10 @@ function exactMatchRequest(search, callbackExactMatch, callbackNoExactMatch)
                 //Exact Match?
                 if(this.response.length !=0)
                 {
-                    showUpdateButton(this.response[0].orphanetID);
                     callbackExactMatch(this.response[0].orphanetID);
                 }
                 else
                 {
-                    hideUpdateButton();
                     callbackNoExactMatch();
                 }
             }
@@ -178,8 +176,16 @@ window.onload = function()
                 //Do the ajax(s) request(s)
                 exactMatchRequest(
                     search,
-                    function(terms, search){console.log("Exact match");updateSuggestions([]);},
-                    function(){console.log("No exact match");suggestionsRequest(terms, search);}
+                    function(orphanetID){
+                        console.log("Exact match");
+                        exactMatch=true;
+                        showUpdateButton(orphanetID);
+                        updateSuggestions([]);},
+                    function(){
+                        console.log("No exact match");
+                        exactMatch=false;
+                        hideUpdateButton();
+                        suggestionsRequest(terms, search);}
                                  );
             }
             else
@@ -192,5 +198,20 @@ window.onload = function()
             updateSuggestions([]);
         }
     }
+    
+    //Use of arrows
+    document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 38:
+            upInSuggestions();
+            break;
+        case 40:
+            downInSuggestions();
+            break;
+        case 13:
+            enterScript();
+            break;
+    }
+};
 
 };
