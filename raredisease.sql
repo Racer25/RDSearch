@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 28 Juillet 2017 à 00:31
+-- Généré le :  Dim 30 Juillet 2017 à 04:53
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.5.8
 
@@ -6985,7 +6985,6 @@ INSERT INTO `raredisease` (`orphanetID`, `name`, `description`) VALUES
 ('64280', 'Childhood absence epilepsy', 'Childhood absence epilepsy (CAE) is a familial generalized pediatric epilepsy, characterized by very frequent (multiple per day) absence seizures, usually occurring in children between the ages of 4 and 10 years, with, in most cases, a good prognosis.'),
 ('643', 'Giant axonal neuropathy', 'Giant axonal neuropathy (GAN) is a degenerative disorder that is characterised by a progressive motor and sensitive peripheral and central nervous system neuropathy.'),
 ('644', 'NARP syndrome', 'Neuropathy, Ataxia, and Retinitis Pigmentosa (NARP) syndrome is a clinically heterogeneous progressive condition characterized by a combination of proximal neurogenic muscle weakness, sensory-motor neuropathy, ataxia, and pigmentary retinopathy.'),
-('64518', 'Prout', NULL),
 ('64542', 'Acrofacial dysostosis, Kennedy-Teebi type', 'Acrofacial dysostosis, Kennedy-Teebi type was reported as a new type of acrofacial dysostosis (see this term) due to the presence of manifestations not usually seen in Nager syndrome (NS; see this term) such as microcephaly, blepharophimosis, microtia, a peculiar beakednose, cleft lip and palate, symmetrical involvement of the thumbs and great toes and developmental delay. It has since been suggested that these features can also be a part of the NS phenotype.'),
 ('64545', 'Benign idiopathic neonatal seizures', ''),
 ('646', 'Niemann-Pick disease type C', 'Niemann-Pick disease type C (NP-C) is a lysosomal lipid storage disease (see this term) characterized by variable clinical signs, depending on the age of onset, such as prolonged unexplained neonatal jaundice or cholestasis, isolated unexplained splenomegaly, and progressive, often severe neurological symptoms such as cognitive decline, cerebellar ataxia, vertical supranuclear gaze palsy (VSPG), dysarthria, dysphagia, dystonia, seizures, gelastic cataplexy, and psychiatric disorders.'),
@@ -7027,7 +7026,6 @@ INSERT INTO `raredisease` (`orphanetID`, `name`, `description`) VALUES
 ('65288', 'Permanent neonatal diabetes mellitus-pancreatic and cerebellar agenesis syndrome', 'Permanent neonatal diabetes mellitus-pancreatic and cerebellar agenesis syndrome is characterized by neonatal diabetes mellitus associated with cerebellar and/or pancreatic agenesis.'),
 ('653', 'Multiple endocrine neoplasia type 2', 'Multiple endocrine neoplasia type 2 (MEN2) is a multiple endocrine neoplasia (see this term), a polyglandular cancer syndrome characterized by the occurrence of medullary thyroid carcinoma (MTC), pheochromocytoma (PCC; see these terms), in one variant, primary hyperparathyroidism (PHPT). There are three forms: MEN2A, MEN2B, and familial medullary thyroid carcinoma (FMTC) (see these terms).'),
 ('654', 'Nephroblastoma', 'Nephroblastoma is the most frequent malignant renal tumor in children and is associated with an abnormal proliferation of cells that resemble the kidney cells of an embryo (metanephroma), leading to the term embryonal tumor.'),
-('6546', 'PROUT', NULL),
 ('655', 'Nephronophthisis', ''),
 ('656', 'Familial idiopathic steroid-resistant nephrotic syndrome', 'Familial idiopathic steroid-resistant nephrotic syndrome is characterized by a nephrotic syndrome with often early onset.'),
 ('65681', 'Vaginal atresia', ''),

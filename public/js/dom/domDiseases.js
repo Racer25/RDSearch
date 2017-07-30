@@ -95,26 +95,32 @@ var upInSuggestions = function()
     var suggestionsDiv=document.getElementById("suggestions");
     if(suggestionsDiv.hasChildNodes())
     {
-        //Get index of selectedSuggestion
-        var selectedSuggestionCopy=selectedSuggestion;
-        var indexSelectedSuggestion = 0;
-        while( (selectedSuggestionCopy = selectedSuggestionCopy.previousSibling) != null ) 
+        if(selectedSuggestion == null || selectedSuggestion == undefined)
         {
-            indexSelectedSuggestion++;   
-        }
-        if(indexSelectedSuggestion > 0)
-        {
-            //Deleting style
-            for(var i =0; i <suggestionsDiv.childElementCount ; i++)
-            {
-                suggestionsDiv.childNodes[i].style="";
-            }
-
-            selectedSuggestion = suggestionsDiv.childNodes[indexSelectedSuggestion-1];
+            selectedSuggestion=suggestionsDiv.firstChild;
             selectedSuggestion.style="color: #000!important;background-color: #ccc!important;";
         }
+        else
+        {
+            //Get index of selectedSuggestion
+            var selectedSuggestionCopy=selectedSuggestion;
+            var indexSelectedSuggestion = 0;
+            while( (selectedSuggestionCopy = selectedSuggestionCopy.previousSibling) != null ) 
+            {
+                indexSelectedSuggestion++;   
+            }
+            if(indexSelectedSuggestion > 0)
+            {
+                //Deleting style
+                for(var i =0; i <suggestionsDiv.childElementCount ; i++)
+                {
+                    suggestionsDiv.childNodes[i].style="";
+                }
 
-
+                selectedSuggestion = suggestionsDiv.childNodes[indexSelectedSuggestion-1];
+                selectedSuggestion.style="color: #000!important;background-color: #ccc!important;";
+            }
+        }
     }
 }
 
@@ -122,7 +128,7 @@ var enterScript = function()
 {
     if(selectedSuggestion != null && selectedSuggestion != undefined)
     {
-       changeInputContent(selectedSuggestion.textContent);
+        changeInputContent(selectedSuggestion.textContent);
     }
     else if(exactMatch)
     {
