@@ -12,6 +12,7 @@
     "jsdom": "^10.1.0",
     "markdown": "~0.5",
     "mysql": "^2.13.0",
+    "ncbi-entrez-api": "^1.0.1",
     "request": "^2.81.0",
     "utf8": "^2.1.2",
     "xml2js": "^0.4.17"

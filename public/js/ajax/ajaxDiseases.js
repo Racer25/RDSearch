@@ -14,7 +14,7 @@ function suggestionsRequest(terms, search)
                 //Requête ok
                 var suggestedDiseases=this.response;
 
-                //Ordering suggestions
+                //Ordering suggestions with levenshtein distance
                 suggestedDiseases=suggestedDiseases.sort(function(a, b){return getEditDistance(a.name, search)-getEditDistance(b.name, search)});
 
                 //Top 5 of suggestions
