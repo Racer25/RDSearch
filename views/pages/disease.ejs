@@ -10,6 +10,7 @@
             body, html {height: 100%}
             .bgimg {
                 background-image: url('/static/imgs/fond.jpg');
+                background-attachment: fixed;
                 min-height: 100%;
                 background-position: center;
                 background-size: cover;
@@ -18,9 +19,13 @@
 
         <!-- My AJAX -->
         <script src="/static/js/ajax/ajaxDiseases.js"></script>
-        
+        <script src="/static/js/ajax/ajaxDiseaseInfo.js"></script>
+
         <!-- My DOM scripts -->
-        <script src="/static/js/dom/domDiseases.js"></script>
+        <script src="/static/js/dom/domDiseaseInfo.js"></script>
+
+        <!--Libs-->
+        <script src="/static/libs/Chart.min.js"></script>
     </head>
     <body>
 
@@ -28,28 +33,38 @@
             <div class="w3-display-topleft w3-padding-large w3-xlarge">
                 Logo
             </div>
-            <div class="w3-display-middle w3-twothird w3-container">
+            <div class="w3-row">
+                <div class="w3-col w3-left w3-container" style="width:150px"></div>
+                <div class="w3-col w3-right w3-container" style="width:150px"></div>
+                <div class="w3-container w3-rest" style="display:block;margin-right:auto;margin-left:auto">
 
-                <div class="w3-panel w3-white w3-border">
-                    <h1><%= disease.name %></h1>
+                    <div class="w3-panel w3-white w3-border">
+                        <h1><b><%= disease.name %></b></h1>
+                    </div>
+                    <div class="w3-panel w3-white w3-border">
+                        <p><%= 
+                                (function()
+                                 {
+                                if(disease.description != "")
+                                {
+                                    return disease.description;
+                                }
+                                else
+                                {
+                                    return "No description";
+                                }
+                            })(); %></p>
+                    </div>
+                    <div class="w3-panel w3-white w3-border">
+                        <h2><b>Statistics</b></h2>
+                    </div>
+                    <div class="w3-panel w3-white w3-border chart-container">
+                        <canvas id="graphPublicationsPerYear" orphanetID="<%=disease.orphanetID%>"></canvas>
+                    </div>
+                    <h4>Go back to <a href="/">homepage</a></h4>
                 </div>
-                <div class="w3-panel w3-white w3-border">
-                    <p><%= 
-                            (function()
-                             {
-                            if(disease.description != "")
-                            {
-                                return disease.description;
-                            }
-                            else
-                            {
-                                return "No description";
-                            }
-                        })(); %></p>
-                </div>
-                <h4>Go back to <a href="/">homepage</a></h4>
             </div>
-
+            
             <div class="w3-display-bottomleft w3-padding-large">
                 Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
             </div>

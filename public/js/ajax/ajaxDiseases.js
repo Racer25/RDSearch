@@ -2,7 +2,7 @@ function suggestionsRequest(terms, search)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
-    maRequeteAJAX.open("GET", "suggestions/"+terms, true, null, null);
+    maRequeteAJAX.open("GET", "/suggestions/"+terms, true, null, null);
     maRequeteAJAX.responseType = "json";
 
     maRequeteAJAX.onreadystatechange = function () 
@@ -38,7 +38,7 @@ function exactMatchRequest(search, callbackExactMatch, callbackNoExactMatch)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
-    maRequeteAJAX.open("GET", "exactMatch/"+search, true, null, null);
+    maRequeteAJAX.open("GET", "/exactMatch/"+search, true, null, null);
     maRequeteAJAX.responseType = "json";
 
     maRequeteAJAX.onreadystatechange = function () 
@@ -142,5 +142,5 @@ window.onload = function()
                     break;
                              }
         };
-    }
+    }    
 };

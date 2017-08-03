@@ -2,7 +2,7 @@ function showResultsOfSearchRequest(terms)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
-    maRequeteAJAX.open("GET", "searchDisease/"+terms, true, null, null);
+    maRequeteAJAX.open("GET", "/searchDisease/"+terms, true, null, null);
     maRequeteAJAX.responseType = "json";
 
     maRequeteAJAX.onreadystatechange = function () 

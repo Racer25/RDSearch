@@ -15,6 +15,7 @@ var UpdateModule = require("./local_node_modules/controller/UpdateModule.js");
 
 var ConnectionProvider = require("./local_node_modules/dao/ConnectionProvider.js");
 var RareDiseaseDao = require("./local_node_modules/dao/RareDiseaseDao.js");
+var RareDisease_YearDao = require("./local_node_modules/dao/RareDisease_YearDao.js");
 
 //Server configuration (session, static, ...)
 var app = express();
@@ -65,8 +66,8 @@ app.get('/exactMatch/:search', function(req, res) {
     ConnectionProvider.getConnection();
     ConnectionProvider.connect();
     RareDiseaseDao.getRareDiseaseByName(search, 
-                                  function(results)
-                                  {
+                                        function(results)
+                                        {
         res.header("Content-Type", "application/json; charset=utf-8");
         res.json(results);
     });
@@ -76,12 +77,25 @@ app.get('/exactMatch/:search', function(req, res) {
 app.get('/suggestions/:terms', function(req, res) {
     var terms=req.params.terms;
     terms=terms.split(",");
-    
+
     ConnectionProvider.getConnection();
     ConnectionProvider.connect();
-    
+
     RareDiseaseDao.getRareDiseasesSuggestions(terms, function(results)
-                                  {
+                                              {
+        res.header("Content-Type", "application/json; charset=utf-8");
+        res.json(results);
+    });
+});
+
+app.get('/graphData/:orphanetID', function(req, res) {
+    var orphanetID=req.params.orphanetID;
+
+    ConnectionProvider.getConnection();
+    ConnectionProvider.connect();
+
+    RareDisease_YearDao.getRareDisease_YearByOrphanetID(orphanetID, function(results)
+                                              {
         res.header("Content-Type", "application/json; charset=utf-8");
         res.json(results);
     });
@@ -92,11 +106,13 @@ app.get('/disease/:orphanetID', function(req, res) {
 
     ConnectionProvider.getConnection();
     ConnectionProvider.connect();
-    
-    RareDiseaseDao.getRareDiseaseByOrphanetID(orphanetID, function(results)
-                                  {
-        res.render('pages/disease.ejs', {disease: results[0]});
-    });
+
+    RareDiseaseDao.getRareDiseaseByOrphanetID(
+        orphanetID, function(results)
+        {
+            var disease=results[0];
+            res.render('pages/disease.ejs', {disease: disease});
+        });
 });
 
 //Error 404
