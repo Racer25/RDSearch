@@ -58,6 +58,10 @@ var showGraph = function(data)
                     line: {
                         tension: 0, // disables bezier curves
                     }
+                },
+                animation:
+                {
+                    easing:"easeOutExpo"
                 }
             }
         }

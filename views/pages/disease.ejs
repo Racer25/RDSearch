@@ -42,6 +42,7 @@
                         <h1><b><%= disease.name %></b></h1>
                     </div>
                     <div class="w3-panel w3-white w3-border">
+                        <h2><b>Description:</b></h2>
                         <p><%= 
                                 (function()
                                  {
@@ -56,15 +57,15 @@
                             })(); %></p>
                     </div>
                     <div class="w3-panel w3-white w3-border">
-                        <h2><b>Statistics</b></h2>
-                    </div>
-                    <div class="w3-panel w3-white w3-border chart-container">
-                        <canvas id="graphPublicationsPerYear" orphanetID="<%=disease.orphanetID%>"></canvas>
+                        <h2><b>Statistics: </b></h2>
+                        <div class="w3-panel w3-white w3-border chart-container">
+                            <canvas id="graphPublicationsPerYear" orphanetID="<%=disease.orphanetID%>"></canvas>
+                        </div>
                     </div>
                     <h4>Go back to <a href="/">homepage</a></h4>
                 </div>
             </div>
-            
+
             <div class="w3-display-bottomleft w3-padding-large">
                 Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
             </div>

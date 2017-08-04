@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <!-- Head generic Content -->
         <% include ../partials/headContent %>
-        
+
+        <style>
+            body,h1 {font-family: "Raleway", sans-serif}
+            body, html {height: 100%}
+            .bgimg {
+                background-image: url('/static/imgs/fond.jpg');
+                min-height: 100%;
+                background-position: center;
+                background-size: cover;
+            }
+        </style>
+
+        <!-- My AJAX -->
+        <script src="/static/js/ajax/ajaxDiseases.js"></script>
+
+        <!-- My DOM scripts -->
+        <script src="/static/js/dom/domDiseases.js"></script>
+        <script src="/static/js/tool/levenshtein.js"></script>
+
     </head>
+    <body>
 
-    <body class="w3-light-grey">
-
-        <!-- Top container -->
-        <% include ../partials/topcontainer %>
-
-        <!-- !PAGE CONTENT! -->
-        <div class="w3-main" style="margin-top:43px;">
-
-            <div class="w3-container w3-center" style="padding-top:22px">
-                <h1 style="font-size: 400%"><b> Error 404: Page not found</b></h1>
-                <p>Woops. Looks like this page doesn't exist.</p>
-                <p>Go back to <a href="/">homepage</a></p>
+        <div class="bgimg w3-display-container w3-animate-opacity w3-text-black">
+            <div class="w3-display-topleft w3-padding-large w3-xlarge">
+                Logo
             </div>
-
-            <!-- Footer -->
-            <% include ../partials/footer %>
-
-            <!-- End page content -->
+            <div class="w3-display-middle w3-twothird w3-center" style="padding-bottom:200px">
+                <h1 style="font-size: 400%; text-shadow:1px 1px 0 white, -1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white">
+                    <img src="/static/imgs/false-2061132_1280.png" style="width:100px;vertical-align:middle"/>
+                    <b style="vertical-align:middle"> Error 404: Page not found</b></h1>
+                <div class="w3-container">
+                    <p>Woops. Looks like this page doesn't exist.</p>
+                    <p>Go back to <a href="/">homepage</a></p></div>
+            </div>
+            <div class="w3-display-bottomleft w3-padding-large">
+                Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
+            </div>
         </div>
-        
-        <!-- Sidebarscript -->
-        <% include ../partials/sidebarscript %>
 
     </body>
 </html>
