@@ -42,19 +42,10 @@
                         <h1><b><%= disease.name %></b></h1>
                     </div>
                     <div class="w3-panel w3-white w3-border">
-                        <h2><b>Description:</b></h2>
-                        <p><%= 
-                                (function()
-                                 {
-                                if(disease.description != "")
-                                {
-                                    return disease.description;
-                                }
-                                else
-                                {
-                                    return "No description";
-                                }
-                            })(); %></p>
+                    <%for(var i = 0; i<textualInformations.length; i++){%>
+                        <h2><b><%=textualInformations[i].title%>:</b></h2>
+                        <p><%= textualInformations[i].content%></p>
+                    <%}%>
                     </div>
                     <div class="w3-panel w3-white w3-border">
                         <h2><b>Statistics: </b></h2>
