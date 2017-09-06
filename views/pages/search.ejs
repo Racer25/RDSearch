@@ -18,9 +18,11 @@
 
         <!-- My AJAX -->
         <script src="/static/js/ajax/ajaxDiseases.js"></script>
+        <script src="/static/js/ajax/ajaxHome.js"></script>
 
         <!-- My DOM scripts -->
         <script src="/static/js/dom/domDiseases.js"></script>
+        <script src="/static/js/dom/domHome.js"></script>
         <script src="/static/js/tool/levenshtein.js"></script>
 
     </head>
@@ -48,7 +50,28 @@
                     </div>
                 </div>
                 <div class="w3-white w3-padding-16 w3-col s3">
-                    <p>TESSST</p>
+                    <div>
+                        <div class="w3-container" style="vertical-align: middle">
+                            <h3 class="w3-twothird">Most studied diseases of </h3>
+                            <select class="w3-select w3-third" name="selectDate" id="selectDate"
+                            onchange="if(this.selectedIndex != undefined){}">
+                                <%for(var i = 0; i<years.length; i++){%>
+                                <option value="<%=years[i]%>"><%=years[i]%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                        <ul class="w3-ul w3-border" id="topDiseasesList">
+                            <%for(var i = 0; i<rareDiseases.length; i++){%>
+                            <li class="w3-hover-blue" style="cursor:pointer" onclick="window.open('/disease/<%=rareDiseases[i].orphanetID%>', '_self')">
+                                <p><b><%=rareDiseases[i].name%></b> (<b><%=rareDisease_Years[i].numberOfPublications%></b> publications)</p>
+                            </li>
+                            <%}%>
+                            <li class="w3-hover-blue" style="cursor:pointer"><b>...</b></li>
+                        </ul>
+                    </div>
+                    <div>
+
+                    </div>
                 </div>
             </div>
 

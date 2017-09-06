@@ -6,6 +6,7 @@ var express = require('express');
 var session = require('cookie-session');
 var bodyParser = require("body-parser");
 var exec = require('child_process').exec;
+var async = require("async");
 
 //Personnal modules
 var Searcher = require("./local_node_modules/controller/Searcher.js");
@@ -16,6 +17,7 @@ var UpdateModule = require("./local_node_modules/controller/UpdateModule.js");
 var ConnectionProvider = require("./local_node_modules/dao/ConnectionProvider.js");
 var RareDiseaseDao = require("./local_node_modules/dao/RareDiseaseDao.js");
 var RareDisease_YearDao = require("./local_node_modules/dao/RareDisease_YearDao.js");
+var YearDao = require("./local_node_modules/dao/YearDao.js");
 var TextualInformationDao = require("./local_node_modules/dao/TextualInformationDao.js"); 
 
 //Server configuration (session, static, ...)
@@ -35,7 +37,51 @@ app.use(function(req, res, next)
 
 //Handling GET requests
 app.get('/', function(req, res) {
-    res.render('pages/search.ejs');
+    var rareDiseases=[];
+
+    //Get years of database
+    YearDao.getYears(
+        function(years)
+        {
+            var realYears=[];
+            for(var i = 0; i <years.length; i++)
+            {
+                realYears.push(years[i].year);
+            }
+            //Get number of publications of first year in array
+            RareDisease_YearDao.getTop3RareDisease_Year(years[0].year, 4,
+                function(rareDisease_Years)
+                {
+                    async.each(
+                        rareDisease_Years,
+                        function(rareDisease_Year, next)
+                        {
+                            //Get diseases details
+                            RareDiseaseDao.getRareDiseaseByOrphanetID(rareDisease_Year.orphanetID,
+                                function(rareDisease)
+                                {
+                                    rareDiseases.push(rareDisease[0]);
+                                    next();
+                                }
+                            );
+                        },
+                        function(err)
+                        {
+                            if(err)
+                            {
+                                console.error("Error occurred searching top 3 of rarediseases");
+                                res.render('pages/search.ejs', {years: realYears, rareDisease_Years: rareDisease_Years,
+                                    rareDiseases:rareDiseases});
+                            }
+                            else
+                            {
+                                res.render('pages/search.ejs', {years: realYears, rareDisease_Years: rareDisease_Years,
+                                    rareDiseases:rareDiseases});
+                            }
+                        });
+                });
+        }
+    );
 });
 
 app.get('/home', function(req, res) {
@@ -73,6 +119,43 @@ app.get('/exactMatch/:search', function(req, res) {
             res.json(results);
         });
 
+});
+
+app.get('/topDiseases/:year', function(req, res) {
+    var year=req.params.year;
+
+    var rareDiseases=[];
+
+    RareDisease_YearDao.getTop3RareDisease_Year(year, 4,
+        function(rareDisease_Years)
+        {
+            async.each(
+                rareDisease_Years,
+                function(rareDisease_Year, next)
+                {
+                    RareDiseaseDao.getRareDiseaseByOrphanetID(rareDisease_Year.orphanetID,
+                        function(rareDisease)
+                        {
+                            var newRareDisease = rareDisease[0];
+                            newRareDisease.numberOfPublications = rareDisease_Year.numberOfPublications;
+                            rareDiseases.push(rareDisease[0]);
+                            next();
+                        }
+                    );
+                },
+                function(err)
+                {
+                    if(err)
+                    {
+                        console.error("Error occurred searching top 3 of rarediseases");
+                        res.json(rareDiseases);
+                    }
+                    else
+                    {
+                        res.json(rareDiseases);
+                    }
+                });
+        });
 });
 
 app.get('/suggestions/:terms', function(req, res) {
@@ -118,7 +201,7 @@ app.get('/disease/:orphanetID', function(req, res) {
 });
 
 //Error 404
-app.use(function(req, res, next){
+app.use(function(req, res){
     res.status(404).render("pages/404.ejs");
 });
 
