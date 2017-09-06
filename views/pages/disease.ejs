@@ -45,7 +45,16 @@
                     <%for(var i = 0; i<textualInformations.length; i++){%>
                         <h2><b><%=textualInformations[i].title%>:</b></h2>
                         <p><%= textualInformations[i].content%></p>
-                    <%}%>
+                        <div class="w3-container">
+                            <p class="w3-col s11 m11 l11"></p>
+                            <p class="w3-col s1 m1 l1" >
+                                Source:
+                                <a href="<%=textualInformations[i].sourceLink%>" target="_blank">
+                                    <%= textualInformations[i].sourceName%>
+                                </a>
+                            </p>
+                        </div>
+                        <%}%>
                     </div>
                     <div class="w3-panel w3-white w3-border">
                         <h2><b>Statistics: </b></h2>

@@ -64,8 +64,7 @@ app.get('/example', function(req, res) {
 
 app.get('/exactMatch/:search', function(req, res) {
     var search=req.params.search;
-    ConnectionProvider.getConnection();
-    ConnectionProvider.connect();
+
     RareDiseaseDao.getRareDiseaseByName(
         search, 
         function(results)
@@ -80,9 +79,6 @@ app.get('/suggestions/:terms', function(req, res) {
     var terms=req.params.terms;
     terms=terms.split(",");
 
-    ConnectionProvider.getConnection();
-    ConnectionProvider.connect();
-
     RareDiseaseDao.getRareDiseasesSuggestions(
         terms, 
         function(results)
@@ -95,9 +91,6 @@ app.get('/suggestions/:terms', function(req, res) {
 app.get('/graphData/:orphanetID', function(req, res) {
     var orphanetID=req.params.orphanetID;
 
-    ConnectionProvider.getConnection();
-    ConnectionProvider.connect();
-
     RareDisease_YearDao.getRareDisease_YearByOrphanetID(
         orphanetID, 
         function(results)
@@ -109,9 +102,6 @@ app.get('/graphData/:orphanetID', function(req, res) {
 
 app.get('/disease/:orphanetID', function(req, res) {
     var orphanetID=req.params.orphanetID;
-
-    ConnectionProvider.getConnection();
-    ConnectionProvider.connect();
 
     RareDiseaseDao.getRareDiseaseByOrphanetID(
         orphanetID, 
