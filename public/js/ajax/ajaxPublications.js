@@ -1,4 +1,4 @@
-function showResultsOfSearchRequest(terms) 
+var showResultsOfSearchRequest = function(terms)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -21,14 +21,14 @@ function showResultsOfSearchRequest(terms)
                 hideLoading();
             }
         }
-    }
+    };
 
     //Show loading icon
     showLoading();
 
     //On envoie au serveur node.js
     maRequeteAJAX.send();
-}
+};
 
 window.onload = function() 
 {

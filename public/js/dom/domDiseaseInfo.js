@@ -66,4 +66,4 @@ var showGraph = function(data)
             }
         }
     );
-}
+};

@@ -1,4 +1,4 @@
-function topDiseasesRequest(year, callback)
+var topDiseasesRequest = function(year, callback)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -23,13 +23,13 @@ function topDiseasesRequest(year, callback)
                 callback([]);
             }
         }
-    }
+    };
 
     //On envoie au serveur node.js
     maRequeteAJAX.send();
-}
+};
 
-function suggestionsRequest(terms, search)
+var suggestionsRequest = function(terms, search)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -59,13 +59,13 @@ function suggestionsRequest(terms, search)
                 console.error("Error in search request, status: "+this.status);
             }
         }
-    }
+    };
 
     //On envoie au serveur node.js
     maRequeteAJAX.send();
-}
+};
 
-function exactMatchRequest(search, callbackExactMatch, callbackNoExactMatch)
+var exactMatchRequest = function(search, callbackExactMatch, callbackNoExactMatch)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -94,11 +94,11 @@ function exactMatchRequest(search, callbackExactMatch, callbackNoExactMatch)
                 console.error("Error in exactMatchRequest, status: "+this.status);
             }
         }
-    }
+    };
 
     //On envoie au serveur node.js
     maRequeteAJAX.send();
-}
+};
 
 window.onload = function()
 {

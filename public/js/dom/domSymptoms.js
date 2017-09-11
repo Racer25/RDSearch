@@ -1,12 +1,12 @@
 var showLoading = function()
 {
     document.getElementById("loadicon").style.display = "block";
-}
+};
 
 var hideLoading = function()
 {
     document.getElementById("loadicon").style.display = "none";
-}
+};
 
 var updateCloudWord = function(symptomsWithSize)
 {
@@ -47,4 +47,4 @@ var updateCloudWord = function(symptomsWithSize)
             .attr("transform", function(d) {return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";})
             .text(function(d) { return d.text; });
     }
-}
+};

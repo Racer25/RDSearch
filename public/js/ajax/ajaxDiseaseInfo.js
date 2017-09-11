@@ -1,4 +1,4 @@
-function graphDataRequest(orphanetID, callback) 
+var graphDataRequest = function(orphanetID, callback)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -31,11 +31,11 @@ function graphDataRequest(orphanetID, callback)
                 console.error("Error in graphDataRequest, status: "+this.status);
             }
         }
-    }
+    };
 
     //On envoie au serveur node.js
     maRequeteAJAX.send();
-}
+};
 
 window.onload = function() 
 {

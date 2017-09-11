@@ -1,4 +1,4 @@
-function showSymptomsCloudWord(terms) 
+var showSymptomsCloudWord = function(terms)
 {
     // Ecrire requête Ajax
     var maRequeteAJAX = new XMLHttpRequest();
@@ -22,14 +22,14 @@ function showSymptomsCloudWord(terms)
                 hideLoading();
             }
         }
-    }
+    };
 
     //Show loading icon
     showLoading();
 
     //On envoie au serveur node.js
     maRequeteAJAX.send();
-}
+};
 
 window.onload = function() 
 {

@@ -1,12 +1,12 @@
 var showLoading = function()
 {
     document.getElementById("loadicon").style.display = "block";
-}
+};
 
 var hideLoading = function()
 {
     document.getElementById("loadicon").style.display = "none";
-}
+};
 
 var updateSearchResults = function(publications)
 {
@@ -59,4 +59,4 @@ var updateSearchResults = function(publications)
     }
 
     respanel.appendChild(table);
-}
+};
