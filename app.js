@@ -12,13 +12,12 @@ var async = require("async");
 var Searcher = require("./local_node_modules/controller/Searcher.js");
 var LingPipeModule = require("./local_node_modules/controller/LingPipeModule.js");
 var RelationExtractor = require("./local_node_modules/controller/RelationExtractor.js");
-var UpdateModule = require("./local_node_modules/controller/UpdateModule.js");
 
 var ConnectionProvider = require("./local_node_modules/dao/ConnectionProvider.js");
 var RareDiseaseDao = require("./local_node_modules/dao/RareDiseaseDao.js");
 var RareDisease_YearDao = require("./local_node_modules/dao/RareDisease_YearDao.js");
 var YearDao = require("./local_node_modules/dao/YearDao.js");
-var TextualInformationDao = require("./local_node_modules/dao/TextualInformationDao.js"); 
+var TextualInformationDao = require("./local_node_modules/dao/TextualInformationDao.js");
 
 //Server configuration (session, static, ...)
 var app = express();
