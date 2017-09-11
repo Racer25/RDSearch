@@ -17,11 +17,9 @@
         </style>
 
         <!-- My AJAX -->
-        <script src="/static/js/ajax/ajaxDiseases.js"></script>
         <script src="/static/js/ajax/ajaxHome.js"></script>
 
         <!-- My DOM scripts -->
-        <script src="/static/js/dom/domDiseases.js"></script>
         <script src="/static/js/dom/domHome.js"></script>
         <script src="/static/js/tool/levenshtein.js"></script>
 
@@ -45,7 +43,8 @@
                             </div>
                         </div>
 
-                        <button class="w3-btn w3-ripple w3-red w3-margin-left w3-quarter w3-disabled" id="searchButton" type="button">Search</button>
+                        <!-- Bug float left with chrome (w3-quarter) -->
+                        <button class="w3-btn w3-ripple w3-red w3-margin-left w3-disabled" id="searchButton" type="button" style="width:24.99%">Search</button>
 
                     </div>
                 </div>
