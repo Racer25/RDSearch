@@ -39,4 +39,4 @@ password : '',
 database : 'RDSearchDB',
 ```
 
-Once done, run the SQL script "raredisease.sql" provided in the repository in your MySQL data base manager
+Once done, run the SQL script "rdsearchdb.sql" provided in the repository in your MySQL data base manager
