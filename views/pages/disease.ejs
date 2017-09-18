@@ -66,6 +66,9 @@
                     </div>
                     <div class="w3-panel w3-white w3-border">
                         <h2><b>Top 3 of most cited publications: </b></h2>
+                        <%if(publications.length == 0) {%>
+                        <h4><b>No publications found on Pubmed for this disease...</b></h4>
+                        <%}%>
                         <%for(var i =0; i < publications.length; i++){%>
                             <p><a href="https://scholar.google.ca/scholar?q=<%=publications[i].doi%>" target="_blank"><b class="titleToTruncate"><%=publications[i].title%></b> cited <%=rareDisease_MostCitedPublications[i].timesCited%> times</a></p>
                         <%}%>
