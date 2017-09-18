@@ -31,8 +31,8 @@ var showGraph = function(data)
                             type:"linear",
                             ticks: 
                             {
-                                stepSize:1,
-                                beginAtZero:true
+                                beginAtZero:true,
+                                maxTicksLimit:20
                             }
                         }
                     ],
