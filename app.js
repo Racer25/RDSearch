@@ -18,6 +18,8 @@ var RareDiseaseDao = require("./local_node_modules/dao/RareDiseaseDao.js");
 var RareDisease_YearDao = require("./local_node_modules/dao/RareDisease_YearDao.js");
 var YearDao = require("./local_node_modules/dao/YearDao.js");
 var TextualInformationDao = require("./local_node_modules/dao/TextualInformationDao.js");
+var MostCitedPublicationDao = require("./local_node_modules/dao/MostCitedPublicationDao.js");
+var RareDisease_MostCitedPublicationDao = require("./local_node_modules/dao/RareDisease_MostCitedPublicationDao.js");
 
 //Server configuration (session, static, ...)
 var app = express();
@@ -59,7 +61,7 @@ app.get('/', function(req, res) {
                             RareDiseaseDao.getRareDiseaseByOrphanetID(rareDisease_Year.orphanetID,
                                 function(rareDisease)
                                 {
-                                    rareDiseases.push(rareDisease[0]);
+                                    rareDiseases.push(rareDisease);
                                     next();
                                 }
                             );
@@ -135,9 +137,8 @@ app.get('/topDiseases/:year', function(req, res) {
                     RareDiseaseDao.getRareDiseaseByOrphanetID(rareDisease_Year.orphanetID,
                         function(rareDisease)
                         {
-                            var newRareDisease = rareDisease[0];
-                            newRareDisease.numberOfPublications = rareDisease_Year.numberOfPublications;
-                            rareDiseases.push(rareDisease[0]);
+                            rareDisease.numberOfPublications = rareDisease_Year.numberOfPublications;
+                            rareDiseases.push(rareDisease);
                             next();
                         }
                     );
@@ -189,12 +190,51 @@ app.get('/disease/:orphanetID', function(req, res) {
         orphanetID, 
         function(results)
         {
-            var disease=results[0];
+            var disease=results;
             TextualInformationDao.getTextualInformationByOrphanetID(
                 disease.orphanetID,
                 function(textualInformations)
                 {
-                    res.render('pages/disease.ejs', {disease: disease, textualInformations:textualInformations});
+                    RareDisease_MostCitedPublicationDao.getRareDisease_MostCitedPublicationFromOrphanetID(
+                        disease.orphanetID,
+                        function(rareDisease_MostCitedPublications)
+                        {
+                            var publications=[];
+                            async.each
+                            (
+                                rareDisease_MostCitedPublications,
+                                function(rareDisease_MostCitedPublication, next)
+                                {
+                                    MostCitedPublicationDao.getPublication(
+                                        rareDisease_MostCitedPublication.idPublication,
+                                        function(publication)
+                                        {
+                                            publications.push(publication);
+                                            next();
+                                        }
+                                    )
+                                },
+                                function(err)
+                                {
+                                    if(err)
+                                    {
+                                        console.error("Error occuring recovering  mostCitedPublications from DB");
+                                    }
+                                    else
+                                    {
+                                        res.render('pages/disease.ejs',
+                                            {
+                                                disease: disease,
+                                                textualInformations: textualInformations,
+                                                rareDisease_MostCitedPublications: rareDisease_MostCitedPublications,
+                                                publications: publications
+                                            }
+                                            );
+                                    }
+                                }
+                            );
+                        }
+                    );
                 });
         });
 });

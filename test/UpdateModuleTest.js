@@ -1,3 +1,3 @@
-var UpdateModule = require("../local_node_modules/controller/UpdateModule.js");
+let UpdateModule = require("../local_node_modules/controller/UpdateModule.js");
 
 UpdateModule.noUpdateRareDiseaseWorkflow();

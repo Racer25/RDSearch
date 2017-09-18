@@ -44,4 +44,5 @@ window.onload = function()
         var orphanetID=document.getElementById("graphPublicationsPerYear").getAttribute("orphanetID");
         graphDataRequest(orphanetID);
     }
+    truncate(".titleToTruncate", 100);
 };

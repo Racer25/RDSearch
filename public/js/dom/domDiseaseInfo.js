@@ -16,7 +16,8 @@ var showGraph = function(data)
                         xAxisID:"year",
                         yAxisID:"numberOfPublications",
                         showline:true,
-                        data: data
+                        data: data,
+                        lineTension: 0.5
                     }
                 ]
             }
@@ -66,4 +67,16 @@ var showGraph = function(data)
             }
         }
     );
+};
+
+var truncate = function(selector, maxLength)
+{
+    var elements = document.querySelectorAll(selector);
+    for(let i =0; i < elements.length; i++)
+    {
+        if (elements[i].innerText.length > maxLength)
+        {
+            elements[i].innerText = elements[i].innerText.substr(0, maxLength) + '...';
+        }
+    }
 };

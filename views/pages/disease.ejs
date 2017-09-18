@@ -41,6 +41,9 @@
                         <h1><b><%= disease.name %></b></h1>
                     </div>
                     <div class="w3-panel w3-white w3-border">
+                        <%if(textualInformations.length == 0) {%>
+                        <h4><b>No description...</b></h4>
+                        <%}%>
                     <%for(var i = 0; i<textualInformations.length; i++){%>
                         <h2><b><%=textualInformations[i].title%>:</b></h2>
                         <p><%= textualInformations[i].content%></p>
@@ -60,6 +63,12 @@
                         <div class="w3-panel w3-white w3-border chart-container">
                             <canvas id="graphPublicationsPerYear" orphanetID="<%=disease.orphanetID%>"></canvas>
                         </div>
+                    </div>
+                    <div class="w3-panel w3-white w3-border">
+                        <h2><b>Top 3 of most cited publications: </b></h2>
+                        <%for(var i =0; i < publications.length; i++){%>
+                            <p><a href="https://scholar.google.ca/scholar?q=<%=publications[i].doi%>" target="_blank"><b class="titleToTruncate"><%=publications[i].title%></b> cited <%=rareDisease_MostCitedPublications[i].timesCited%> times</a></p>
+                        <%}%>
                     </div>
                     <h4>Go back to <a href="/">homepage</a></h4>
                 </div>
