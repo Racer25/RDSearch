@@ -10,11 +10,11 @@ var hideLoading = function()
 
 var updateCloudWord = function(symptomsWithSize)
 {
-    //Delete all children of respanel except the load icon
-    var respanel = document.getElementById("respanel");
-    while (respanel.hasChildNodes() && respanel.lastChild.id != "loadicon") 
+    //Delete all children of symptomsCloudPanel
+    var symptomsCloudPanel = document.getElementById("symptomsCloudPanel");
+    while (symptomsCloudPanel.hasChildNodes())
     {
-        respanel.removeChild(respanel.lastChild);
+        symptomsCloudPanel.removeChild(symptomsCloudPanel.lastChild);
     }
 
     //Cloud word creation
@@ -31,7 +31,7 @@ var updateCloudWord = function(symptomsWithSize)
     layout.start();
 
     function draw(words) {
-        d3.select("#respanel").append("svg")
+        d3.select("#symptomsCloudPanel").append("svg")
             .attr("class", "w3-centered w3-animate-right")
             .attr("width", layout.size()[0])
             .attr("height", layout.size()[1])

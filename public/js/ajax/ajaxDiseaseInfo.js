@@ -37,12 +37,51 @@ var graphDataRequest = function(orphanetID, callback)
     maRequeteAJAX.send();
 };
 
+var symptomsCloudWordRequest = function(orphanetID, callback)
+{
+    // Ecrire requête Ajax
+    var maRequeteAJAX = new XMLHttpRequest();
+    maRequeteAJAX.open("GET", "/symptomsCloudWordRequest/"+orphanetID, true, null, null);
+    maRequeteAJAX.responseType = "json";
+
+    maRequeteAJAX.onreadystatechange = function ()
+    {
+        if (this.readyState == 4)
+        { // requete terminée
+            if(this.status == 200)
+            {
+                //Requête ok
+                var symptomsWithWeight=this.response;
+
+                updateCloudWord(symptomsWithWeight);
+            }
+            else
+            {
+                console.error("Error in symptomsCloudWordRequest, status: "+this.status);
+            }
+        }
+    };
+
+    //On envoie au serveur node.js
+    maRequeteAJAX.send();
+};
+
 window.onload = function() 
 {
+    //Disp graph
     if(document.getElementById("graphPublicationsPerYear") != null)
     {
         var orphanetID=document.getElementById("graphPublicationsPerYear").getAttribute("orphanetID");
         graphDataRequest(orphanetID);
     }
+
+    //Truncate publications title
     truncate(".titleToTruncate", 100);
+
+    //Disp cloud word of symptoms
+    if(document.getElementById("symptomsCloudPanel") != null)
+    {
+        var orphanetID=document.getElementById("graphPublicationsPerYear").getAttribute("orphanetID");
+        symptomsCloudWordRequest(orphanetID);
+    }
 };

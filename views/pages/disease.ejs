@@ -22,6 +22,7 @@
 
         <!-- My DOM scripts -->
         <script src="/static/js/dom/domDiseaseInfo.js"></script>
+        <script src="/static/js/dom/domSymptoms.js"></script>
 
         <!--Libs-->
         <script src="/static/libs/Chart.min.js"></script>
@@ -72,6 +73,10 @@
                         <%for(var i =0; i < publications.length; i++){%>
                             <p><a href="https://scholar.google.ca/scholar?q=<%=publications[i].doi%>" target="_blank"><b class="titleToTruncate"><%=publications[i].title%></b> cited <%=rareDisease_MostCitedPublications[i].timesCited%> times</a></p>
                         <%}%>
+                    </div>
+                    <div class="w3-panel w3-white w3-border">
+                        <h2><b>Symptoms recovered by TextMining: </b></h2>
+                        <div class="w3-panel w3-border w3-round-small" id="symptomsCloudPanel" orphanetID="<%=disease.orphanetID%>"></div>
                     </div>
                     <h4>Go back to <a href="/">homepage</a></h4>
                 </div>

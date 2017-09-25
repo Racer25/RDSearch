@@ -20,6 +20,8 @@ var YearDao = require("./local_node_modules/dao/YearDao.js");
 var TextualInformationDao = require("./local_node_modules/dao/TextualInformationDao.js");
 var MostCitedPublicationDao = require("./local_node_modules/dao/MostCitedPublicationDao.js");
 var RareDisease_MostCitedPublicationDao = require("./local_node_modules/dao/RareDisease_MostCitedPublicationDao.js");
+var RareDisease_SymptomDao = require("./local_node_modules/dao/RareDisease_SymptomDao.js");
+var SymptomDao = require("./local_node_modules/dao/SymptomDao.js");
 
 //Server configuration (session, static, ...)
 var app = express();
@@ -27,8 +29,8 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use(session({name: 'session', keys: ['key1', 'key2']}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function(req, res, next)
-        {
-    if (typeof(req.session.list) == 'undefined') 
+{
+    if (typeof(req.session.list) == 'undefined')
     {
         req.session.list = [];
     }
@@ -113,7 +115,7 @@ app.get('/exactMatch/:search', function(req, res) {
     var search=req.params.search;
 
     RareDiseaseDao.getRareDiseaseByName(
-        search, 
+        search,
         function(results)
         {
             res.header("Content-Type", "application/json; charset=utf-8");
@@ -163,7 +165,7 @@ app.get('/suggestions/:terms', function(req, res) {
     terms=terms.split(",");
 
     RareDiseaseDao.getRareDiseasesSuggestions(
-        terms, 
+        terms,
         function(results)
         {
             res.header("Content-Type", "application/json; charset=utf-8");
@@ -175,7 +177,7 @@ app.get('/graphData/:orphanetID', function(req, res) {
     var orphanetID=req.params.orphanetID;
 
     RareDisease_YearDao.getRareDisease_YearByOrphanetID(
-        orphanetID, 
+        orphanetID,
         function(results)
         {
             res.header("Content-Type", "application/json; charset=utf-8");
@@ -183,11 +185,55 @@ app.get('/graphData/:orphanetID', function(req, res) {
         });
 });
 
+app.get('/symptomsCloudWordRequest/:orphanetID', function(req, res) {
+    var orphanetID=req.params.orphanetID;
+
+    var symptomsWithWeight = [];
+    RareDisease_SymptomDao.getRareDisease_SymptomFromOrphanetID(
+        orphanetID,
+        function(rareDisease_Symptoms)
+        {
+            async.each(
+                rareDisease_Symptoms,
+                function(rareDisease_Symptom, nextSymptom)
+                {
+                    SymptomDao.getSymptom(
+                        rareDisease_Symptom.name,
+                        function(symptom)
+                        {
+                            console.log("Symptom found");
+                            symptomsWithWeight.push(
+                                {
+                                    text:symptom.name,
+                                    size:rareDisease_Symptom.weight
+                                });
+                            nextSymptom();
+                        }
+                    );
+                },
+                function(err)
+                {
+                    if(err)
+                    {
+                        console.error("Error recovering symptoms from DB");
+                    }
+                    else
+                    {
+                        console.info("Success recovering symptoms from DB");
+                        res.header("Content-Type", "application/json; charset=utf-8");
+                        res.json(symptomsWithWeight);
+                    }
+                }
+            );
+        }
+    );
+});
+
 app.get('/disease/:orphanetID', function(req, res) {
     var orphanetID=req.params.orphanetID;
 
     RareDiseaseDao.getRareDiseaseByOrphanetID(
-        orphanetID, 
+        orphanetID,
         function(results)
         {
             var disease=results;
@@ -222,6 +268,7 @@ app.get('/disease/:orphanetID', function(req, res) {
                                     }
                                     else
                                     {
+                                        console.info("Success recovering  mostCitedPublications from DB");
                                         res.render('pages/disease.ejs',
                                             {
                                                 disease: disease,
@@ -229,7 +276,7 @@ app.get('/disease/:orphanetID', function(req, res) {
                                                 rareDisease_MostCitedPublications: rareDisease_MostCitedPublications,
                                                 publications: publications
                                             }
-                                            );
+                                        );
                                     }
                                 }
                             );
