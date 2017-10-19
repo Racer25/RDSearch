@@ -23,8 +23,8 @@ Use **CTRL + C**
 On your browser: http://localhost:8080/
 
 ### Which file do the search on Pubmed?
-The local module **Searcher** (/local_node_modules/Searcher.js) use Pubmed to retrieve full articles. 
-And the local module **UpdateModule** (/local_node_modules/UpdateModule.js) is responsible for updating the data base.
+The local module **NCBIAPIModule** (/local_node_modules/controller/NCBIAPIModule.js) use Pubmed to retrieve full articles. 
+And the local module **UpdateModule** (/local_node_modules/controller/UpdateModule.js) is responsible for updating the data base.
 
 ### Do I need to create a data base?
 Yes, you have to create a data base to test the search engine. She's needed to stock number of publications per year, rare disease informations, ...
