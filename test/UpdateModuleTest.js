@@ -3,6 +3,7 @@ global.__base = __dirname + '/';
 let UpdateModule = require("../local_node_modules/controller/UpdateModule.js");
 var SymptomDao = require("../local_node_modules/dao/SymptomDao.js");
 var TextMiningModule= require("../local_node_modules/controller/TextMiningModule.js");
+var NCBIAPIModule= require("../local_node_modules/controller/NCBIAPIModule.js");
 
 UpdateModule.noUpdateRareDiseaseWorkflow();
 
