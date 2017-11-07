@@ -5,9 +5,6 @@ var SymptomDao = require("../local_node_modules/dao/SymptomDao.js");
 var TextMiningModule= require("../local_node_modules/controller/TextMiningModule.js");
 var NCBIAPIModule= require("../local_node_modules/controller/NCBIAPIModule.js");
 
-console.log("231"<"2426");
-console.log("2"<"2426");
-console.log("231"<"2426");
 
 UpdateModule.noUpdateRareDiseaseWorkflow();
 
